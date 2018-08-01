@@ -46,6 +46,8 @@
 #include <boost/function.hpp>
 #include <boost/unordered_map.hpp>
 
+#include "exports.h"
+
 namespace interactive_markers
 {
 
@@ -53,7 +55,7 @@ namespace interactive_markers
 ///
 /// Note: Keep in mind that changes made by calling insert(), erase(), setCallback() etc.
 ///       are not applied until calling applyChanges().
-class InteractiveMarkerServer : boost::noncopyable
+class INTERACTIVE_MARKERS_DECL InteractiveMarkerServer : boost::noncopyable
 {
 public:
 
