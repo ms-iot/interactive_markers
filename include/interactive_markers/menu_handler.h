@@ -38,12 +38,14 @@
 #include <boost/function.hpp>
 #include <boost/unordered_map.hpp>
 
+#include "exports.h"
+
 namespace interactive_markers
 {
 
 // Simple non-intrusive helper class which creates a menu and maps its
 // entries to function callbacks
-class MenuHandler
+class INTERACTIVE_MARKERS_DECL MenuHandler
 {
 public:
 
