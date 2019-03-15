@@ -38,6 +38,10 @@
 #include <interactive_markers/interactive_marker_server.h>
 #include <interactive_markers/interactive_marker_client.h>
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
 #define DBG_MSG( ... ) printf( __VA_ARGS__ ); printf("\n");
 #define DBG_MSG_STREAM( ... )  std::cout << __VA_ARGS__ << std::endl;
 
@@ -103,7 +107,11 @@ void waitMsg()
   for(int i=0;i<10;i++)
   {
     ros::spinOnce();
+#ifndef _WIN32
     usleep(1000);
+#else
+    Sleep(1);
+#endif
   }
 }
 
@@ -184,7 +192,11 @@ TEST(InteractiveMarkerServerAndClient, connect_tf_error)
   // Make marker tf info valid again -> connection should be successfully initialized again
   DBG_MSG("----------------------------------------");
 
+#ifndef _WIN32
   usleep(2000000);
+#else
+  Sleep(2000);
+#endif
   waitMsg();
   client.update();
 
