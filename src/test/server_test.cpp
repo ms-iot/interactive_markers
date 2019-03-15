@@ -34,6 +34,10 @@
 
 #include <interactive_markers/interactive_marker_server.h>
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
 TEST(InteractiveMarkerServer, addRemove)
 {
   // create an interactive marker server on the topic namespace simple_marker
@@ -95,7 +99,11 @@ TEST(InteractiveMarkerServer, addRemove)
   server.applyChanges();
 
   //avoid subscriber destruction warning
+#ifndef _WIN32
   usleep(1000);
+#else
+  Sleep(1);
+#endif
 }
 
 

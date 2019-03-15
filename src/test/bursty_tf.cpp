@@ -37,6 +37,10 @@
 
 #include <math.h>
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
 boost::shared_ptr<interactive_markers::InteractiveMarkerServer> server;
 
 using namespace visualization_msgs;
@@ -152,7 +156,11 @@ void frameCallback(const ros::TimerEvent&)
     if (!sending) ROS_INFO("on");
     sending = true;
     br.sendTransform(tf::StampedTransform(t, time, "base_link", "bursty_frame"));
+#ifndef _WIN32
     usleep(10000);
+#else
+    Sleep(10);
+#endif
   }
   else
   {
